@@ -1,25 +1,32 @@
 import React from 'react';
+import {useState} from "react";
+import {Link, Routes, Route} from "react-router-dom";
 import logo from './logo.svg';
 import './App.css';
+import { About } from "./pages/About";
+import { Welcome } from "./pages/Welcome";
 
 function App() {
+    const [count, setCount] = useState(0)
+
+    const increment = () => setCount(prev => prev + 1);
+    const decrement = () => setCount(prev => prev - 1);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit My Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div>
+          <h1>value = {count}</h1>
+          <button onClick={increment}>increment</button>
+          <button onClick={decrement}>decrement</button>
+
+          <div style={{display: 'flex', gap: 15}}>
+              <Link to={'about'}>about</Link>
+              <Link to={'welcome'}>welcome</Link>
+          </div>
+
+          <Routes>
+              <Route path="/about" element={<About />} />
+              <Route path="/welcome" element={<Welcome />} />
+          </Routes>
+      </div>
   );
 }
 
